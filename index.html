@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Profile Card Generator</h1>
+
+    <div class="wrapper">
+        <!-- input form -->
+        <form id="formProfile">
+            <h2>Enter Info</h2>
+
+            <label for="txtName">Name</label>
+            <input type="text" id="txtName" placeholder="Your name">
+
+            <label for="txtJob">Job Title</label>
+            <input type="text" id="txtJob" placeholder="Job title">
+
+            <label for="txtBio">Bio</label>
+            <textarea id="txtBio" rows="3"></textarea>
+
+            <label for="favColor">Favorite Color</label>
+            <input type="color" id="favColor">
+
+            <button type="submit">Generate Card</button>
+        </form>
+
+        <!-- profile card -->
+        <div class="cardArea">
+            <h2>Profile Preview</h2>
+            <div class="card" id="card">
+                <div class="cardHeader" id="cardHeader"></div>
+                <div class="cardBody">
+                    <h3 id="cName"></h3>
+                    <p id="cJob"></p>
+                    <p id="cBio"></p>
+                    <button id="btnLike">❤️ Like</button>
+                    <p id="likeNum">0 likes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- real time preview -->
+    <div class="preview">
+        <h3>Real-Time Preview</h3>
+        <p>Name: <span id="prevName"></span></p>
+        <p>Job: <span id="prevJob"></span></p>
+    </div>
+
+    <script>
+        const form = document.getElementById("formProfile");
+        const txtName = document.getElementById("txtName");
+        const txtJob = document.getElementById("txtJob");
+        const txtBio = document.getElementById("txtBio");
+        const favColor = document.getElementById("favColor");
+
+        const cName = document.getElementById("cName");
+        const cJob = document.getElementById("cJob");
+        const cBio = document.getElementById("cBio");
+        const cardHeader = document.getElementById("cardHeader");
+        const card = document.getElementById("card");
+
+        const prevName = document.getElementById("prevName");
+        const prevJob = document.getElementById("prevJob");
+
+        const btnLike = document.getElementById("btnLike");
+        const likeNum = document.getElementById("likeNum");
+        let likes = 0;
+
+        // real-time input
+        txtName.addEventListener("input", function(){
+            prevName.textContent = txtName.value;
+        });
+
+        txtJob.addEventListener("input", function(){
+            prevJob.textContent = txtJob.value;
+        });
+
+        // submit form
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+            cName.textContent = txtName.value;
+            cJob.textContent = txtJob.value;
+            cBio.textContent = txtBio.value;
+            cardHeader.style.backgroundColor = favColor.value;
+        });
+
+        // like button
+        btnLike.addEventListener("click", function(){
+            likes++;
+            likeNum.textContent = likes + " likes";
+        });
+
+        // mouse events
+        card.addEventListener("mouseover", function(){
+            card.style.boxShadow = "0 0 15px rgba(0,0,0,0.3)";
+        });
+
+        card.addEventListener("mouseout", function(){
+            card.style.boxShadow = "none";
+        });
+    </script>
+</body>
+</html>
+    
